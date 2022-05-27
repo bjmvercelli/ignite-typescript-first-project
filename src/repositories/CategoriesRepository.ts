@@ -1,18 +1,14 @@
 import { Category } from "../model/Category"
+import { ICategoriesRepository, ICreateCategoryDTO } from "./ICategoriesRepository";
 
-interface ICreateCategoryDTO {
-  name: string;
-  description: string;
-}
-
-class CategoriesRepository {
+class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[];
 
   constructor() {
     this.categories = [];
   }
 
-  create({ name, description }: ICreateCategoryDTO): void { // a rota não necessita ter acesso ao model, por isso utilizamos um DTO
+  create({ name, description }: ICreateCategoryDTO ): void { // a rota não necessita ter acesso ao model, por isso utilizamos um DTO
     const category = new Category();
 
     Object.assign(category, {
