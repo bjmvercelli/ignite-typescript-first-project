@@ -10,8 +10,6 @@ class ImportCategoryController {
 
     this.importCategoryUseCase.execute(file);
 
-    console.log(file);
-
     return response.send();
   }
 }
