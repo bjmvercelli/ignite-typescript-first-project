@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm'
 import { Category } from '../modules/cars/entities/Category';
+import { Specification } from '../modules/cars/entities/Specification';
 
 const dataSource = new DataSource({
   type: 'postgres',
@@ -8,7 +9,7 @@ const dataSource = new DataSource({
   username: 'docker',
   password: 'ignite',
   database: 'rentx',
-  entities: [Category],
+  entities: [ Category, Specification ],
   migrations: [
     "./src/database/migrations/*.ts"
   ]
