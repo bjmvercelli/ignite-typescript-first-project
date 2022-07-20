@@ -14,4 +14,8 @@ const dataSource = new DataSource({
   ]
 });
 
+export function createConnection(host = "database_ignite"): Promise<DataSource> {
+  return dataSource.setOptions({ host }).initialize();
+}
+
 export default dataSource

@@ -10,13 +10,6 @@ class CategoriesRepository implements ICategoriesRepository {
     this.repository = dataSource.getRepository(Category);
   }
 
-  // public static getInstance(): CategoriesRepository {
-  //   if (!CategoriesRepository.INSTANCE)
-  //     CategoriesRepository.INSTANCE = new CategoriesRepository;
-    
-  //   return CategoriesRepository.INSTANCE;
-  // }
-
   async create({ name, description }: ICreateCategoryDTO ): Promise<void> { // a rota não necessita ter acesso ao model, por isso utilizamos um DTO
     const category = this.repository.create({ 
       name,
