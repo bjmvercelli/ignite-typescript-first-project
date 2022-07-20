@@ -4,6 +4,8 @@ import swaggerDocument from './swagger.json';
 import { createConnection } from "./database";
 import { router } from "./routes";
 
+import "./shared/container"
+
 createConnection();
 
 const app = express();
