@@ -1,9 +1,8 @@
 import { Repository } from "typeorm";
-import dataSource from "../../../../database";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { User } from "../../entities/User";
-import { IUsersRepository } from "../IUsersRepository";
-
+import dataSource from "@shared/infra/typeorm";
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { User } from "@modules/accounts/infra/typeorm/entities/User";
 
 class UsersRepository implements IUsersRepository{
   private repository: Repository<User>
@@ -11,7 +10,6 @@ class UsersRepository implements IUsersRepository{
   constructor() {
     this.repository = dataSource.getRepository(User);
   }
-
 
   async create({ id, name, password, email, driver_license, avatar }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
