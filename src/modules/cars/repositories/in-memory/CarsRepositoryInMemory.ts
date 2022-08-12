@@ -39,8 +39,32 @@ class CarsRepositoryInMemory implements ICarsRepository {
     return car;
   }
 
-  list(): Promise<Car[]> {
-    throw new Error("Method not implemented.");
+  async list(): Promise<Car[]> {
+    return this.cars;
+  }
+
+  async findAvailable(
+    brand?: string,
+    category_id?: string,
+    name?: string
+  ): Promise<Car[]> {
+
+    const availableCars = this.cars
+      .filter(car => {
+          if (
+            car.available ||
+            (
+              (brand && car.brand === brand) || 
+              (category_id && car.category_id === category_id) || 
+              (name && car.name === name)
+            )
+        ) {
+          return car;
+        }
+        return null
+      });
+     
+    return availableCars;
   }
 
 }
