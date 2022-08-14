@@ -18,7 +18,8 @@ class CreateRentalUseCase {
 
   constructor(
 
-    private rentalsRepository: IRentalsRepository
+    private rentalsRepository: IRentalsRepository,
+    private dateProvider: IDateProvider
   ){}
 
   async execute({
@@ -36,10 +37,11 @@ class CreateRentalUseCase {
 
     if(rentalOpenToUser) throw new AppError("Rental in progress for this user!");
 
-    const expectedReturnDateFormat = dayjs(expected_return_date).utc().local().format();
-    const dateNow = dayjs().utc().local().format();
+    const dateNow = this.dateProvider.dateNow();
 
-    const compare = dayjs(expectedReturnDateFormat).diff(dateNow, "hours");
+    const compare = this.dateProvider.compareInHours(dateNow, expected_return_date);
+
+    console.log(compare)
 
     if(compare < minimalHours) throw new AppError("Invalid return time!");
 
